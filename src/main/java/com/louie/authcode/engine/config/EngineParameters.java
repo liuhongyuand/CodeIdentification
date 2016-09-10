@@ -11,6 +11,7 @@ public final class EngineParameters {
     public static final String PROJECT_ROOT = System.getProperties().getProperty("user.dir");
     public static final String CodeIdentifyDataPath = PROJECT_ROOT  + "/data/CodeIdentifyData.data";
 
+    public static final String OWNER = "Louie";
     public static final double similarity = Double.parseDouble(ImportFileUtils.getPropertiesCodeIdentify().getProperty("similarity"));      //相似程度
     public static final double deviation = Double.parseDouble(ImportFileUtils.getPropertiesCodeIdentify().getProperty("deviation"));    //误差系数
     public static final int difRate = Integer.parseInt(ImportFileUtils.getPropertiesCodeIdentify().getProperty("difRate"));           //色值偏移

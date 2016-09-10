@@ -1,5 +1,6 @@
 package com.louie.authcode;
 
+import com.louie.authcode.utils.FileDeleteUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,6 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class StartService {
 
     public static Boolean SystemIsOnline = true;
+
+    static {
+        FileDeleteUtil.initWatcher();
+    }
 
     public static void main(String[] args){
         Object[] objects = new Object[]{StartService.class};

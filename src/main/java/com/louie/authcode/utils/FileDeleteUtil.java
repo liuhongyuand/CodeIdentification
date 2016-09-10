@@ -17,7 +17,7 @@ public class FileDeleteUtil {
     private static final Set<AuthcodeFile> failDeleteFile = new HashSet<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(FileDeleteUtil.class);
 
-    static {
+    public static void initWatcher() {
         startWatch();
         startDeleteFailWatch();
     }

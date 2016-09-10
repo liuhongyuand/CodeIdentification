@@ -14,7 +14,10 @@ import java.util.Date;
 public class FileUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUtils.class);
 
-    public static void ObjectToFile(Object object){
+    public synchronized static void ObjectToFile(Object object){
+        if (object == null){
+            return;
+        }
         SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         File backFile = new File(EngineParameters.CodeIdentifyDataPath + "_" + dataFormat.format(new Date()));
         try(ObjectOutputStream objectOutputStream =  new ObjectOutputStream(new FileOutputStream(EngineParameters.CodeIdentifyDataPath));
@@ -26,7 +29,7 @@ public class FileUtils {
         }
     }
 
-    public static Object FileToObject(){
+    public synchronized static Object FileToObject(){
         Object object = null;
         if (new File(EngineParameters.CodeIdentifyDataPath).length() == 0) {
             return null;
