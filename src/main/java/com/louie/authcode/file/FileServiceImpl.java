@@ -4,6 +4,8 @@ import com.louie.authcode.engine.config.EngineParameters;
 import com.louie.authcode.file.download.GetFile;
 import com.louie.authcode.file.model.AuthcodeFile;
 
+import java.io.File;
+
 /**
  * Created by liuhongyu.louie on 2016/9/10.
  */
@@ -20,6 +22,14 @@ public class FileServiceImpl implements FileService {
     @Override
     public AuthcodeFile delete(AuthcodeFile file) {
         return null;
+    }
+
+    @Override
+    public AuthcodeFile peekFile() {
+        AuthcodeFile file = new AuthcodeFile();
+        File[] files = new File(EngineParameters.PROJECT_ROOT + "/waitTraining").listFiles();
+        file.setFile(files != null ? files[0] : null);
+        return file;
     }
 
 }

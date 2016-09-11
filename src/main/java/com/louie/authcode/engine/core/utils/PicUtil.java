@@ -52,6 +52,24 @@ public class PicUtil {
         return RGB;
     }
 
+    public static BufferedImage initImage(BufferedImage bufferedImage){
+        for (int width = 0; width < bufferedImage.getWidth(); width++) {
+            for (int height = 0; height < bufferedImage.getHeight(); height++) {
+                bufferedImage.setRGB(width, height, -1);
+            }
+        }
+        return bufferedImage;
+    }
+
+    public static BufferedImage mergeImage(BufferedImage src, BufferedImage target, int startWidth){
+        for (int width = 0; width < src.getWidth(); width++) {
+            for (int height = 0; height < src.getHeight(); height++) {
+                target.setRGB(width + startWidth, height, src.getRGB(width, height));
+            }
+        }
+        return target;
+    }
+
     public static int[][] getRGBFromImageFile(String image){
         int[][] srcRGB = new int[0][];
         try {

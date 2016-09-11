@@ -3,6 +3,7 @@ package com.louie.authcode.engine.core;
 import com.louie.authcode.engine.AuthCodeProcess;
 import com.louie.authcode.engine.EngineConfiguration;
 import com.louie.authcode.engine.brain.PointMap;
+import com.louie.authcode.engine.config.EngineParameters;
 import com.louie.authcode.engine.core.cut.v2.DivideProcess;
 import com.louie.authcode.engine.core.utils.PicUtil;
 import com.louie.authcode.exception.ParameterException;
@@ -11,13 +12,17 @@ import com.louie.authcode.utils.FileDeleteUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import static com.louie.authcode.engine.config.EngineParameters.PROJECT_ROOT;
+import static com.louie.authcode.engine.config.EngineParameters.eliminateValue;
 
 /**
  * Created by liuhongyu.louie on 2016/8/21.
@@ -52,9 +57,9 @@ public class CodeIdentify {
         frame.setVisible(true);
     }
 
-    public void trainingPicIdentifyForGUI(final String FILE, boolean importData){
+    public AuthcodeFile trainingPicIdentifyForGUI(AuthcodeFile file, boolean importData){
         AuthCodeProcess process = new CodeImportImpl();
-        Object[] results = process.process(FILE);
+        Object[] results = process.process(file.getFile().getAbsolutePath());
         List<?> letters = (List<?>) results[0];
         Set<?> buffers = (Set<?>) results[1];
         if (importData) {
@@ -67,14 +72,28 @@ public class CodeIdentify {
                 letterNum++;
             }
         } else {
-
+            BufferedImage bufferedImage = new BufferedImage(800, 50, BufferedImage.TYPE_INT_RGB);
+            bufferedImage = PicUtil.initImage(bufferedImage);
+            int width = 50;
+            for (Object object : buffers){
+                bufferedImage = PicUtil.mergeImage((BufferedImage) object, bufferedImage, width);
+                width += 50 + ((BufferedImage) object).getWidth();
+            }
+            File webFile = new File(EngineParameters.WebPath + "/" + file.getFile().getName());
+            file.setWebPathFile(webFile);
+            try {
+                ImageIO.write(bufferedImage, "jpg", webFile);
+            } catch (IOException e) {
+                LOGGER.error(e.getMessage(), e);
+            }
         }
+        return file;
     }
 
     public void trainingPicIdentifyForREST(AuthcodeFile file){
         try {
             AuthCodeProcess process = new CodeProcessImpl();
-            String[] letterStrings = getTrainingData(file.getAuthcode());
+            String[] letterStrings = mapAuthcodeToArray(file.getAuthcode());
             if (file.getFile() == null){
                 return;
             }
@@ -122,7 +141,7 @@ public class CodeIdentify {
         }
     }
 
-    private String[] getTrainingData(String authcode){
+    private String[] mapAuthcodeToArray(String authcode){
         char[] letterChars = authcode.toCharArray();
         String[] letters = new String[letterChars.length];
         for (int i = 0; i < letterChars.length; i++) {
@@ -132,14 +151,12 @@ public class CodeIdentify {
     }
 
     public static void main(String[] args){
+        AuthcodeFile file = new AuthcodeFile();
         strings = new String[]{"p", "a", "p", "e", "r", "", "", "", "", "", "", "", "", ""};
-//        final String Learning = PROJECT_ROOT + "/learning/among.jpg";
-        final String FILE = PROJECT_ROOT + "/training/water.jpg";
-//        final String resources = PROJECT_ROOT + "/resources/captcha_s.jpg";
-//        new CodeIdentify().outputRGB(resources);
-//        new CodeIdentify().codeView(resources);
-        new CodeIdentify().trainingPicIdentifyForGUI(FILE, false);
-//        new CodeIdentify().getCode(resources);
+        String path = PROJECT_ROOT + "/training/complete.jpg";
+        file.setFile(new File(path));
+        new CodeIdentify().trainingPicIdentifyForGUI(file, false);
+//        new CodeIdentify().getCode(file);
     }
 
 }

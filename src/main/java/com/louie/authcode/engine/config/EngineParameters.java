@@ -10,6 +10,8 @@ public final class EngineParameters {
 
     public static final String PROJECT_ROOT = System.getProperties().getProperty("user.dir");
     public static final String CodeIdentifyDataPath = PROJECT_ROOT  + "/data/CodeIdentifyData.data";
+    public static final String WebPath = ImportFileUtils.getPropertiesParameters().getProperty("WebPath");      //Web path
+    public static final String Server = ImportFileUtils.getPropertiesParameters().getProperty("Server");      //Web path
 
     public static final String OWNER = "Louie";
     public static final double similarity = Double.parseDouble(ImportFileUtils.getPropertiesCodeIdentify().getProperty("similarity"));      //相似程度
@@ -21,5 +23,13 @@ public final class EngineParameters {
     public static final int LETTER_WIDTH = Integer.parseInt(ImportFileUtils.getPropertiesCodeIdentify().getProperty("LETTER_WIDTH"));             //字母宽度
     public static final int LETTER_GAP = Integer.parseInt(ImportFileUtils.getPropertiesCodeIdentify().getProperty("LETTER_GAP"));               //字母间隔
     public static final double pixelFilter = Double.parseDouble(ImportFileUtils.getPropertiesCodeIdentify().getProperty("pixelFilter"));         //像素过滤
+
+    public static final class HTML{
+        public static final String $SERVER = "$SERVER";
+        public static final String $IMAGE_PATH = "$IMAGE_PATH";
+        public static final String $USER = "$USER";
+        public static final String $AFTER_ABSOLUTE_PATH = "$AFTER_ABSOLUTE_PATH";
+        public static final String $BEFORE_ABSOLUTE_PATH = "$BEFORE_ABSOLUTE_PATH";
+    }
 
 }

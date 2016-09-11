@@ -11,4 +11,6 @@ public interface FileService {
 
     AuthcodeFile delete(AuthcodeFile file);
 
+    AuthcodeFile peekFile();
+
 }
