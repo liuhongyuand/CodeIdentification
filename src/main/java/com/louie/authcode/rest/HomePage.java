@@ -1,7 +1,10 @@
 package com.louie.authcode.rest;
 
+import com.louie.authcode.rest.utils.HTMLUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.InputStream;
 
 /**
  * Created by liuhongyu.louie on 2016/9/10.
@@ -11,7 +14,8 @@ public class HomePage {
 
     @RequestMapping("/")
     public String welcome(){
-        return "<center><p>Welcome to use authcode identification service.</center>";
+        InputStream stream = DisplayLearningData.class.getClassLoader().getResourceAsStream("html/HomePage.html");
+        return HTMLUtil.getHTML(stream);
     }
 
 }

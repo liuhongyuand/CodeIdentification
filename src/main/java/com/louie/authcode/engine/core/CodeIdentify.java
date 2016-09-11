@@ -54,24 +54,9 @@ public class CodeIdentify {
 
     public void trainingPicIdentifyForGUI(final String FILE, boolean importData){
         AuthCodeProcess process = new CodeImportImpl();
-        JFrame frame = new JFrame();
-        frame.setLayout(null);
-        frame.setSize(600, 100);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Object[] results = process.process(FILE);
         List<?> letters = (List<?>) results[0];
         Set<?> buffers = (Set<?>) results[1];
-        int temp = 10;
-        for (Object bufferObj : buffers) {
-            BufferedImage buffer = (BufferedImage) bufferObj;
-            JLabel label = new JLabel("");
-            label.setIcon(new ImageIcon(buffer));
-            label.setBounds(temp, 0, buffer.getWidth(), buffer.getHeight());
-            frame.add(label);
-            temp = temp + buffer.getWidth() + 20;
-        }
-        frame.setVisible(true);
         if (importData) {
             int letterNum = 0;
             for (Object letterObj : letters) {
@@ -81,13 +66,18 @@ public class CodeIdentify {
                 }
                 letterNum++;
             }
+        } else {
+
         }
-        System.out.println("Map size: " + PointMap.mapSize());
     }
+
     public void trainingPicIdentifyForREST(AuthcodeFile file){
         try {
             AuthCodeProcess process = new CodeProcessImpl();
             String[] letterStrings = getTrainingData(file.getAuthcode());
+            if (file.getFile() == null){
+                return;
+            }
             Object[] results = process.process(file.getFile().getAbsolutePath());
             if (results == null) {
                 return;
@@ -106,6 +96,7 @@ public class CodeIdentify {
             FileDeleteUtil.fileQueue.offer(file);
         }
     }
+
     private void inputData(List<Point> letterList, String letter){
         if (!letter.equals("")) {
             PointMap.put(letter, letterList);
@@ -143,11 +134,11 @@ public class CodeIdentify {
     public static void main(String[] args){
         strings = new String[]{"p", "a", "p", "e", "r", "", "", "", "", "", "", "", "", ""};
 //        final String Learning = PROJECT_ROOT + "/learning/among.jpg";
-//        final String FILE = PROJECT_ROOT + "/training/0bacc360-945f-4d67-b126-1d5504dee16a.jpg";
-        final String resources = PROJECT_ROOT + "/resources/captcha_s.jpg";
+        final String FILE = PROJECT_ROOT + "/training/water.jpg";
+//        final String resources = PROJECT_ROOT + "/resources/captcha_s.jpg";
 //        new CodeIdentify().outputRGB(resources);
 //        new CodeIdentify().codeView(resources);
-        new CodeIdentify().trainingPicIdentifyForGUI(resources, false);
+        new CodeIdentify().trainingPicIdentifyForGUI(FILE, false);
 //        new CodeIdentify().getCode(resources);
     }
 
