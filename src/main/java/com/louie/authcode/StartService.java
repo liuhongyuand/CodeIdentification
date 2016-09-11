@@ -21,4 +21,6 @@ public class StartService {
         SpringApplication.run(objects, args);
     }
 
+    // TODO: 2016/9/11 Add learning module that can display all pic which in the waitTraining floder and has button to choose which should be accept.
+
 }
