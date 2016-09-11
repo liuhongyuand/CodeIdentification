@@ -5,6 +5,7 @@ import com.louie.authcode.engine.EngineConfiguration;
 import com.louie.authcode.engine.brain.PointMap;
 import com.louie.authcode.engine.core.cut.v2.DivideProcess;
 import com.louie.authcode.engine.core.utils.PicUtil;
+import com.louie.authcode.exception.ParameterException;
 import com.louie.authcode.file.model.AuthcodeFile;
 import com.louie.authcode.utils.FileDeleteUtil;
 import org.slf4j.Logger;
@@ -100,6 +101,7 @@ public class CodeIdentify {
                     letterNum++;
                 }
             }
+        } catch (ParameterException ignored){
         } finally {
             FileDeleteUtil.fileQueue.offer(file);
         }
@@ -113,6 +115,9 @@ public class CodeIdentify {
     public String getCode(AuthcodeFile file){
         try {
             AuthCodeProcess process = new CodeProcessImpl();
+            if (file.getFile() == null){
+                return "";
+            }
             Object[] results = process.process(file.getFile().getAbsolutePath());
             if (results == null) {
                 return "";

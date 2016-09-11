@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -26,7 +25,7 @@ public class GetFile {
             out.write(resultImageResponse.bodyAsBytes());
             out.close();
             authcodeFile.setFile(file);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
         return authcodeFile;

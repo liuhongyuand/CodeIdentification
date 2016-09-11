@@ -52,9 +52,6 @@ public class AuthcodeFile {
     }
 
     public File getFile() {
-        if (file == null){
-            throw new ParameterException("File is null");
-        }
         return file;
     }
 

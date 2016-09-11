@@ -26,19 +26,21 @@ public class FileDeleteUtil {
         ThreadSupport.threadPool.execute(() -> {
             LOGGER.info("File delete watcher has been start.");
             while (StartService.SystemIsOnline) {
-                AuthcodeFile file = fileQueue.peek();
-                if (file != null){
-                    if (file.getFile() != null && file.getFile().exists()) {
-                        if (!file.getFile().delete()) {
-                            failDeleteFile.add(file);
+                try {
+                    AuthcodeFile file = fileQueue.peek();
+                    if (file != null) {
+                        if (file.getFile() != null && file.getFile().exists()) {
+                            if (!file.getFile().delete()) {
+                                failDeleteFile.add(file);
+                            }
                         }
+                        fileQueue.poll();
+                        LOGGER.info("Delete " + file.getFile().getName());
+                        TimeUtil.sleep(100);
+                    } else {
+                        TimeUtil.sleep(10 * 1000);
                     }
-                    fileQueue.poll();
-                    LOGGER.info("Delete " + file.getFile().getName());
-                    TimeUtil.sleep(100);
-                } else {
-                    TimeUtil.sleep(10 * 1000);
-                }
+                } catch (Exception ignored){}
             }
         });
     }
@@ -47,17 +49,19 @@ public class FileDeleteUtil {
         ThreadSupport.threadPool.execute(() -> {
             LOGGER.info("File delete failed watcher has been start.");
             while (StartService.SystemIsOnline) {
-                List<AuthcodeFile> removeFiles = new LinkedList<>();
-                int startSize = failDeleteFile.size();
-                failDeleteFile.forEach((file) -> {
-                    if (file.getFile().delete()){
-                        removeFiles.add(file);
-                    }
-                    TimeUtil.sleep(100);
-                });
-                failDeleteFile.removeAll(removeFiles);
-                LOGGER.info("Delete " + removeFiles.size() + " failed files, remainder " + (failDeleteFile.size() - startSize) + " files.");
-                TimeUtil.sleep(60 * 1000);
+                try {
+                    List<AuthcodeFile> removeFiles = new LinkedList<>();
+                    int startSize = failDeleteFile.size();
+                    failDeleteFile.forEach((file) -> {
+                        if (file.getFile().delete()) {
+                            removeFiles.add(file);
+                        }
+                        TimeUtil.sleep(100);
+                    });
+                    failDeleteFile.removeAll(removeFiles);
+                    LOGGER.info("Delete " + removeFiles.size() + " failed files, remainder " + (failDeleteFile.size() - startSize) + " files.");
+                    TimeUtil.sleep(60 * 1000);
+                } catch (Exception ignored){}
             }
         });
     }
