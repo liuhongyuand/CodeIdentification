@@ -12,6 +12,7 @@ public final class EngineParameters {
     public static final String CodeIdentifyDataPath = PROJECT_ROOT  + "/data/CodeIdentifyData.data";
     public static final String Server = ImportFileUtils.getPropertiesParameters().getProperty("Server");      //Web server
     public static final String Port = ImportFileUtils.getPropertiesParameters().getProperty("Port");      //Web port
+    public static final String TrainingDataPath = ImportFileUtils.getPropertiesParameters().getProperty("TrainingDataPath");      //Web port
 
     public static final String OWNER = "Louie";
     public static final double similarity = Double.parseDouble(ImportFileUtils.getPropertiesCodeIdentify().getProperty("similarity"));      //相似程度
@@ -28,6 +29,7 @@ public final class EngineParameters {
         public static final String $SERVER = "$SERVER";
         public static final String $PORT = "$PORT";
         public static final String $USER = "$USER";
+        public static final String $RESULT = "$RESULT";
         public static final String $ABSOLUTE_PATH = "$ABSOLUTE_PATH";
     }
 

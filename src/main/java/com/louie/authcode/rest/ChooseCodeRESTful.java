@@ -1,5 +1,6 @@
 package com.louie.authcode.rest;
 
+import com.louie.authcode.engine.core.CodeIdentify;
 import com.louie.authcode.file.FileService;
 import com.louie.authcode.file.FileServiceImpl;
 import com.louie.authcode.file.model.AuthcodeFile;
@@ -25,6 +26,7 @@ public class ChooseCodeRESTful {
         if (!rename.equals("")){
             file.setAuthcode(rename);
             FileService fileService = new FileServiceImpl();
+            new CodeIdentify().trainingPicIdentifyForREST(file, false);
             fileService.renameAndMove(file);
         } else {
             if (file.getFile() != null){

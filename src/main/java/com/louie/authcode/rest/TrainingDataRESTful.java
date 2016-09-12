@@ -27,7 +27,7 @@ public class TrainingDataRESTful {
             FileService fileService = new FileServiceImpl();
             file = fileService.downloadFile(file);
             CodeIdentify codeIdentify = new CodeIdentify();
-            codeIdentify.trainingPicIdentifyForREST(file);
+            codeIdentify.trainingPicIdentifyForREST(file, true);
         });
         return new ResponseBody("0", "Data has submit.");
     }

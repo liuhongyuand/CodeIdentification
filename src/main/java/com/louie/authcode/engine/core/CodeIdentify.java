@@ -84,7 +84,7 @@ public class CodeIdentify {
         return bufferedImage;
     }
 
-    public void trainingPicIdentifyForREST(AuthcodeFile file){
+    public void trainingPicIdentifyForREST(AuthcodeFile file, boolean needDelete){
         try {
             AuthCodeProcess process = new CodeProcessImpl();
             String[] letterStrings = mapAuthcodeToArray(file.getAuthcode());
@@ -106,7 +106,9 @@ public class CodeIdentify {
             }
         } catch (ParameterException ignored){
         } finally {
-            FileDeleteUtil.fileQueue.offer(file);
+            if (needDelete) {
+                FileDeleteUtil.fileQueue.offer(file);
+            }
         }
     }
 
@@ -116,7 +118,7 @@ public class CodeIdentify {
         }
     }
 
-    public String getCode(AuthcodeFile file){
+    public String getCode(AuthcodeFile file, boolean needDelete){
         try {
             AuthCodeProcess process = new CodeProcessImpl();
             if (file.getFile() == null){
@@ -131,7 +133,9 @@ public class CodeIdentify {
             LOGGER.info("Authcode: " + authCode);
             return authCode;
         } finally {
-            FileDeleteUtil.fileQueue.offer(file);
+            if (needDelete) {
+                FileDeleteUtil.fileQueue.offer(file);
+            }
         }
     }
 

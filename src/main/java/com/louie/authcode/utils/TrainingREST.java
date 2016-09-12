@@ -1,6 +1,7 @@
 package com.louie.authcode.utils;
 
 import com.louie.authcode.engine.config.EngineParameters;
+import com.louie.authcode.rest.utils.RESTfulType;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.fluent.Request;
 import org.slf4j.Logger;
@@ -17,8 +18,8 @@ import java.util.List;
 public class TrainingREST {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TrainingREST.class);
-    private static final String URL = "http://104.236.158.103/authcode/training/";
-    private static final String REQUEST_URL = "http://" + EngineParameters.Server + ":" + EngineParameters.Port + "/louie/training/";
+    private static final String URL = EngineParameters.TrainingDataPath;
+    private static final String REQUEST_URL = "http://" + EngineParameters.Server + ":" + EngineParameters.Port + "/" + EngineParameters.OWNER + RESTfulType.TRAINING;
 
     public static void main(String[] args) {
         new TrainingREST().sendLearningREST();

@@ -13,6 +13,7 @@ public class HTML {
     private String $SERVER = "";
     private String $PORT = "";
     private String $USER = "";
+    private String $RESULT = "";
     private String $ABSOLUTE_PATH = "";
     private Map<String, String> map = new HashMap<>();
 
@@ -24,6 +25,11 @@ public class HTML {
     public void set$PORT(String $PORT) {
         this.$PORT = $PORT;
         map.put(EngineParameters.HTML.$PORT, $PORT);
+    }
+
+    public void set$RESULT(String $RESULT) {
+        this.$RESULT = $RESULT;
+        map.put(EngineParameters.HTML.$RESULT, $RESULT);
     }
 
     public void set$USER(String $USER) {
