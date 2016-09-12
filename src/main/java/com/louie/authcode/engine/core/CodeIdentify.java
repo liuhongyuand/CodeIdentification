@@ -58,11 +58,11 @@ public class CodeIdentify {
     }
 
     public BufferedImage trainingPicIdentifyForGUI(AuthcodeFile file, boolean importData){
-        BufferedImage bufferedImage = new BufferedImage(800, 50, BufferedImage.TYPE_INT_RGB);
         AuthCodeProcess process = new CodeImportImpl();
         Object[] results = process.process(file.getFile().getAbsolutePath());
         List<?> letters = (List<?>) results[0];
         Set<?> buffers = (Set<?>) results[1];
+        BufferedImage bufferedImage = new BufferedImage(buffers.size() * 50 * 2, 50, BufferedImage.TYPE_INT_RGB);
         if (importData) {
             int letterNum = 0;
             for (Object letterObj : letters) {
@@ -76,8 +76,9 @@ public class CodeIdentify {
             bufferedImage = PicUtil.initImage(bufferedImage);
             int width = 50;
             for (Object object : buffers){
-                bufferedImage = PicUtil.mergeImage((BufferedImage) object, bufferedImage, width);
-                width += 50 + ((BufferedImage) object).getWidth();
+                BufferedImage afterDrawBoundary = PicUtil.drawBoundary((BufferedImage) object);
+                bufferedImage = PicUtil.mergeImage(afterDrawBoundary, bufferedImage, width);
+                width += 50 + afterDrawBoundary.getWidth();
             }
         }
         return bufferedImage;

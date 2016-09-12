@@ -82,4 +82,15 @@ public class PicUtil {
         return srcRGB;
     }
 
+    public static BufferedImage drawBoundary(BufferedImage bufferedImage){
+        for (int width = 0; width < bufferedImage.getWidth(); width++) {
+            for (int height = 0; height < bufferedImage.getHeight(); height++) {
+                if (width == 0 || height == 0 || width == bufferedImage.getWidth() - 1 || height == bufferedImage.getHeight() - 1){
+                    bufferedImage.setRGB(width, height, 5555);
+                }
+            }
+        }
+        return bufferedImage;
+    }
+
 }

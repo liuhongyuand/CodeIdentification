@@ -13,6 +13,6 @@ public interface FileService {
 
     AuthcodeFile peekFile();
 
-    void rename(AuthcodeFile file);
+    void renameAndMove(AuthcodeFile file);
 
 }
