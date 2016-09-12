@@ -15,10 +15,8 @@ public class AuthcodeFile {
     private String url;
     private String storagePath;
     private String authcode;
-    private String webPath;
     private URL imageUrl;
     private File file;
-    private File WebPathFile;
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthcodeFile.class);
 
     public AuthcodeFile(){
@@ -37,22 +35,6 @@ public class AuthcodeFile {
 
     public URL getImageUrl() {
         return imageUrl;
-    }
-
-    public String getWebPath() {
-        return webPath;
-    }
-
-    public void setWebPath(String webPath) {
-        this.webPath = webPath;
-    }
-
-    public File getWebPathFile() {
-        return WebPathFile;
-    }
-
-    public void setWebPathFile(File webPathFile) {
-        WebPathFile = webPathFile;
     }
 
     public void setImageUrl(String imageUrl) {

@@ -57,7 +57,8 @@ public class CodeIdentify {
         frame.setVisible(true);
     }
 
-    public AuthcodeFile trainingPicIdentifyForGUI(AuthcodeFile file, boolean importData){
+    public BufferedImage trainingPicIdentifyForGUI(AuthcodeFile file, boolean importData){
+        BufferedImage bufferedImage = new BufferedImage(800, 50, BufferedImage.TYPE_INT_RGB);
         AuthCodeProcess process = new CodeImportImpl();
         Object[] results = process.process(file.getFile().getAbsolutePath());
         List<?> letters = (List<?>) results[0];
@@ -72,22 +73,14 @@ public class CodeIdentify {
                 letterNum++;
             }
         } else {
-            BufferedImage bufferedImage = new BufferedImage(800, 50, BufferedImage.TYPE_INT_RGB);
             bufferedImage = PicUtil.initImage(bufferedImage);
             int width = 50;
             for (Object object : buffers){
                 bufferedImage = PicUtil.mergeImage((BufferedImage) object, bufferedImage, width);
                 width += 50 + ((BufferedImage) object).getWidth();
             }
-            File webFile = new File(EngineParameters.WebPath + "/" + file.getFile().getName());
-            file.setWebPathFile(webFile);
-            try {
-                ImageIO.write(bufferedImage, "jpg", webFile);
-            } catch (IOException e) {
-                LOGGER.error(e.getMessage(), e);
-            }
         }
-        return file;
+        return bufferedImage;
     }
 
     public void trainingPicIdentifyForREST(AuthcodeFile file){

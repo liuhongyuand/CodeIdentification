@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="http://$SERVER:$PORT/provider/jquery-1.9.1.js"></script>
+    <script src="http://$SERVER:$PORT/provider/submit.js"></script>
     <meta charset="UTF-8">
     <title>Learning...</title>
+    <style>
+        #show{
+            position: absolute;
+            top:35%;
+            margin-left:50%;
+            left: -400px;
+        }
+    </style>
 </head>
 <body>
 
-<div style="text-align: center;">
+<div id="show">
     <BR>
-    <img src="$IMAGE_PATH">
-    <form action="http://$SERVER/$USER/choose" method="get">
-        <input type="hidden" name="after_process_file_path" value="$AFTER_ABSOLUTE_PATH">
-        <input type="hidden" name="before_process_file_path" value="$BEFORE_ABSOLUTE_PATH">
-        <input type="text" name="name" placeholder="Letter which you can see">
-        <button type="submit" value="submit">submit</button>
+    <img src="http://$SERVER:$PORT/$USER/display" style="text-align: center;">
+    <form action="http://$SERVER:$PORT/$USER/choose" method="get" style="text-align: center;">
+        <input type="hidden" name="file_path" value="$ABSOLUTE_PATH">
+        <input type="text" name="rename" placeholder="Input what you can see.">
+        <BR>
+        <BR>
+        <button type="submit" value="submit" style="text-align: center">submit</button>
+        <BR>
+        <p style="color: blueviolet; text-align: center; font-style: italic; font-family: 'Microsoft YaHei UI Light'"><B>Submit without anything to skip it.</B></p>
     </form>
 </div>
 </body>

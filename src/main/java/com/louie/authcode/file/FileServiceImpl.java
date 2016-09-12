@@ -5,6 +5,7 @@ import com.louie.authcode.file.download.GetFile;
 import com.louie.authcode.file.model.AuthcodeFile;
 
 import java.io.File;
+import java.nio.file.Files;
 
 /**
  * Created by liuhongyu.louie on 2016/9/10.
@@ -30,6 +31,11 @@ public class FileServiceImpl implements FileService {
         File[] files = new File(EngineParameters.PROJECT_ROOT + "/waitTraining").listFiles();
         file.setFile(files != null ? files[0] : null);
         return file;
+    }
+
+    @Override
+    public void rename(AuthcodeFile file) {
+
     }
 
 }

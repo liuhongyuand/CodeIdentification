@@ -6,6 +6,7 @@ import com.louie.authcode.engine.model.ResponseBody;
 import com.louie.authcode.file.FileService;
 import com.louie.authcode.file.FileServiceImpl;
 import com.louie.authcode.file.model.AuthcodeFile;
+import com.louie.authcode.rest.utils.RESTfulType;
 import com.louie.authcode.utils.ThreadSupport;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by liuhongyu.louie on 2016/9/8.
  */
 @RestController
-@RequestMapping("/{userId}/*")
-public class TrainingData {
+@RequestMapping(RESTfulType.USER)
+public class TrainingDataRESTful {
 
-    @RequestMapping(method = RequestMethod.POST, path = "/training")
+    @RequestMapping(method = RequestMethod.POST, path = RESTfulType.TRAINING)
     public Response trainingData(@RequestParam(value = "url", defaultValue = "") String url, @RequestParam(value = "authcode", defaultValue = "") String authcode){
         ThreadSupport.threadPool.execute(() -> {
             AuthcodeFile file = new AuthcodeFile(url, authcode);

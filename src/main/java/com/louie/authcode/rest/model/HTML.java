@@ -11,10 +11,9 @@ import java.util.Map;
 public class HTML {
 
     private String $SERVER = "";
-    private String $IMAGE_PATH = "";
+    private String $PORT = "";
     private String $USER = "";
-    private String $AFTER_ABSOLUTE_PATH = "";
-    private String $BEFORE_ABSOLUTE_PATH = "";
+    private String $ABSOLUTE_PATH = "";
     private Map<String, String> map = new HashMap<>();
 
     public void set$SERVER(String $SERVER) {
@@ -22,9 +21,9 @@ public class HTML {
         map.put(EngineParameters.HTML.$SERVER, $SERVER);
     }
 
-    public void set$IMAGE_PATH(String $IMAGE_PATH) {
-        this.$IMAGE_PATH = $IMAGE_PATH;
-        map.put(EngineParameters.HTML.$IMAGE_PATH, $IMAGE_PATH);
+    public void set$PORT(String $PORT) {
+        this.$PORT = $PORT;
+        map.put(EngineParameters.HTML.$PORT, $PORT);
     }
 
     public void set$USER(String $USER) {
@@ -32,14 +31,9 @@ public class HTML {
         map.put(EngineParameters.HTML.$USER, $USER);
     }
 
-    public void set$AFTER_ABSOLUTE_PATH(String $AFTER_ABSOLUTE_PATH) {
-        this.$AFTER_ABSOLUTE_PATH = $AFTER_ABSOLUTE_PATH;
-        map.put(EngineParameters.HTML.$AFTER_ABSOLUTE_PATH, $AFTER_ABSOLUTE_PATH);
-    }
-
-    public void set$BEFORE_ABSOLUTE_PATH(String $BEFORE_ABSOLUTE_PATH) {
-        this.$BEFORE_ABSOLUTE_PATH = $BEFORE_ABSOLUTE_PATH;
-        map.put(EngineParameters.HTML.$BEFORE_ABSOLUTE_PATH, $BEFORE_ABSOLUTE_PATH);
+    public void set$ABSOLUTE_PATH(String $ABSOLUTE_PATH) {
+        this.$ABSOLUTE_PATH = $ABSOLUTE_PATH;
+        map.put(EngineParameters.HTML.$ABSOLUTE_PATH, $ABSOLUTE_PATH);
     }
 
     public String replaceAll(String htmlContext){

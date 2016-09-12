@@ -1,8 +1,12 @@
 package com.louie.authcode.rest.utils;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -25,6 +29,30 @@ public class HTMLUtil {
             LOGGER.error(e.getMessage(), e);
         }
         return builder.toString();
+    }
+
+    public static byte[] InputStreamToBytes(InputStream inputStream){
+        byte[] bytes = new byte[0];
+        try {
+            if (inputStream != null) {
+                bytes = IOUtils.toByteArray(inputStream);
+            }
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return bytes;
+    }
+
+    public static byte[] BufferedImageToBytes(BufferedImage bufferedImage){
+        byte[] imageInByte = new byte[0];
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()){
+            ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream );
+            byteArrayOutputStream.flush();
+            imageInByte = byteArrayOutputStream.toByteArray();
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return imageInByte;
     }
 
 }
