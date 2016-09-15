@@ -45,6 +45,9 @@ public class HTMLUtil {
 
     public static byte[] BufferedImageToBytes(BufferedImage bufferedImage){
         byte[] imageInByte = new byte[0];
+        if (bufferedImage == null){
+            return new byte[0];
+        }
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()){
             ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream );
             byteArrayOutputStream.flush();

@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
  */
 public class ThreadSupport {
 
-    public static final ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 5);
+    private static final int AVAILABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
+    public static final ExecutorService threadPool = Executors.newFixedThreadPool(AVAILABLE_PROCESSORS * 100);
 
 }

@@ -1,6 +1,5 @@
 package com.louie.authcode.rest;
 
-import com.louie.authcode.engine.brain.PointMap;
 import com.louie.authcode.engine.config.EngineParameters;
 import com.louie.authcode.engine.core.CodeIdentify;
 import com.louie.authcode.file.FileService;
@@ -31,9 +30,11 @@ public class GetLearningPageRESTful {
         html.set$SERVER(EngineParameters.Server);
         html.set$PORT(EngineParameters.Port);
         html.set$USER(EngineParameters.OWNER);
-        html.set$RESULT(code[0]);
-        html.set$LETTER_LENGTH(code[1]);
-        html.set$ABSOLUTE_PATH(file.getFile().getAbsolutePath());
+        if (code != null && code.length > 1) {
+            html.set$RESULT(code[0]);
+            html.set$LETTER_LENGTH(code[1]);
+            html.set$ABSOLUTE_PATH(file.getFile().getAbsolutePath());
+        }
         InputStream stream = DisplayLearningImageRESTful.class.getClassLoader().getResourceAsStream("html/DisplayLearningData.html");
         return html.replaceAll(HTMLUtil.getHTML(stream));
     }

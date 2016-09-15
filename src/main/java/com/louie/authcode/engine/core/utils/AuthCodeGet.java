@@ -20,7 +20,7 @@ import java.util.UUID;
 public class AuthCodeGet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthCodeGet.class);
-    private static final String TEST_CODE_WEB = "https://www.douban.com/group/topic/88736817/?start=0#last";
+    private static final String TEST_CODE_WEB = "https://www.douban.com/group/topic/90868720/?start=0#last";
 
     private static void refreshWeb(String url) throws IOException {
         final Connection connection = Jsoup.connect(url);
@@ -47,7 +47,7 @@ public class AuthCodeGet {
 
     public static void main(String[] args) throws IOException {
         ImportFileUtils.initHEAD();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 665; i++) {
             refreshWeb(TEST_CODE_WEB);
         }
     }
