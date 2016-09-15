@@ -59,6 +59,9 @@ public class CodeIdentify {
 
     public BufferedImage trainingPicIdentifyForGUI(AuthcodeFile file, boolean importData){
         AuthCodeProcess process = new CodeImportImpl();
+        if (file == null || file.getFile() == null){
+            return null;
+        }
         Object[] results = process.process(file.getFile().getAbsolutePath());
         List<?> letters = (List<?>) results[0];
         Set<?> buffers = (Set<?>) results[1];
@@ -121,7 +124,7 @@ public class CodeIdentify {
     public String[] getCode(AuthcodeFile file, boolean needDelete){
         try {
             AuthCodeProcess process = new CodeProcessImpl();
-            if (file.getFile() == null){
+            if (file == null || file.getFile() == null){
                 return null;
             }
             Object[] results = process.process(file.getFile().getAbsolutePath());

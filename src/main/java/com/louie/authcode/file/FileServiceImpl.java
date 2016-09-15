@@ -34,7 +34,11 @@ public class FileServiceImpl implements FileService {
     public AuthcodeFile peekFile() {
         AuthcodeFile file = new AuthcodeFile();
         File[] files = new File(EngineParameters.PROJECT_ROOT + "/waitTraining").listFiles();
-        file.setFile(files != null ? files[0] : null);
+        if (files != null && files.length > 0) {
+            file.setFile(files[0]);
+        } else {
+            file = null;
+        }
         return file;
     }
 

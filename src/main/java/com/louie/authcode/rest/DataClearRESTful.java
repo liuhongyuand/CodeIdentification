@@ -19,6 +19,7 @@ public class DataClearRESTful {
     @RequestMapping(method = RequestMethod.POST, path = RESTfulType.CLEAR)
     public Response clearData(@PathVariable(value = RESTfulType.USER_PathVariable) String userId){
         PointMap.clearData();
+        LoadDataRESTful.isLoaded = false;
         return new ResponseBody("1", "The data has been clear.");
     }
 

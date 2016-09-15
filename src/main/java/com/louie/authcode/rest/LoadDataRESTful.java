@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(RESTfulType.USER)
 public class LoadDataRESTful {
 
-    private static boolean isLoaded = false;
+    public static boolean isLoaded = false;
 
     @RequestMapping(method = RequestMethod.GET, path = RESTfulType.LOAD)
     public Response loadData(@PathVariable(RESTfulType.USER_PathVariable) String userId){
