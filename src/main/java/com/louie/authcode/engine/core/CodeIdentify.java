@@ -62,7 +62,7 @@ public class CodeIdentify {
         Object[] results = process.process(file.getFile().getAbsolutePath());
         List<?> letters = (List<?>) results[0];
         Set<?> buffers = (Set<?>) results[1];
-        BufferedImage bufferedImage = new BufferedImage(buffers.size() * 50 * 2, 50, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bufferedImage = new BufferedImage(buffers.size() * 50 * 2 == 0 ? 50 : buffers.size() * 50 * 2, 50, BufferedImage.TYPE_INT_RGB);
         if (importData) {
             int letterNum = 0;
             for (Object letterObj : letters) {
