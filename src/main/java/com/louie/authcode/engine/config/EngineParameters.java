@@ -29,6 +29,7 @@ public final class EngineParameters {
         public static final String $SERVER = "$SERVER";
         public static final String $PORT = "$PORT";
         public static final String $USER = "$USER";
+        public static final String $LETTER_LENGTH = "$LETTER_LENGTH";
         public static final String $RESULT = "$RESULT";
         public static final String $ABSOLUTE_PATH = "$ABSOLUTE_PATH";
     }

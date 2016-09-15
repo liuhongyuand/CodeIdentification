@@ -25,7 +25,7 @@ public class IdentifyCodeRESTful {
         FileService fileService = new FileServiceImpl();
         file = fileService.downloadFile(file);
         CodeIdentify codeIdentify = new CodeIdentify();
-        return new ResponseBody("1", "success", codeIdentify.getCode(file, true));
+        return new ResponseBody("1", "success", codeIdentify.getCode(file, true)[0]);
     }
 
 }

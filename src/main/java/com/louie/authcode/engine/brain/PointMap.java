@@ -37,7 +37,7 @@ public class PointMap extends ConcurrentHashMap<String, HashSet<List<Point>>> im
         return POINT_MAP.size();
     }
 
-    public static void put(String letter, List<Point> pointList){
+    public synchronized static void put(String letter, List<Point> pointList){
         if (POINT_MAP.containsKey(letter)) {
             POINT_MAP.get(letter).add(pointList);
         } else {

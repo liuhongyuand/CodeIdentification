@@ -26,12 +26,13 @@ public class GetLearningPageRESTful {
     public String trainingData(){
         FileService fileService = new FileServiceImpl();
         AuthcodeFile file = fileService.peekFile();
-        String code = new CodeIdentify().getCode(file, false);
+        String[] code = new CodeIdentify().getCode(file, false);
         HTML html = new HTML();
         html.set$SERVER(EngineParameters.Server);
         html.set$PORT(EngineParameters.Port);
         html.set$USER(EngineParameters.OWNER);
-        html.set$RESULT(code);
+        html.set$RESULT(code[0]);
+        html.set$LETTER_LENGTH(code[1]);
         html.set$ABSOLUTE_PATH(file.getFile().getAbsolutePath());
         InputStream stream = DisplayLearningImageRESTful.class.getClassLoader().getResourceAsStream("html/DisplayLearningData.html");
         return html.replaceAll(HTMLUtil.getHTML(stream));

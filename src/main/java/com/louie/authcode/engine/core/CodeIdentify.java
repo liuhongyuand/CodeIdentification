@@ -118,20 +118,20 @@ public class CodeIdentify {
         }
     }
 
-    public String getCode(AuthcodeFile file, boolean needDelete){
+    public String[] getCode(AuthcodeFile file, boolean needDelete){
         try {
             AuthCodeProcess process = new CodeProcessImpl();
             if (file.getFile() == null){
-                return "";
+                return null;
             }
             Object[] results = process.process(file.getFile().getAbsolutePath());
             if (results == null) {
-                return "";
+                return null;
             }
             List<?> letters = (List<?>) results[0];
             String authCode = PointMap.getAuthCode(letters);
             LOGGER.info("Authcode: " + authCode);
-            return authCode;
+            return new String[]{authCode,letters.size() + ""};
         } finally {
             if (needDelete) {
                 FileDeleteUtil.fileQueue.offer(file);
